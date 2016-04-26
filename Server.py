@@ -32,3 +32,27 @@ else:
 ser = serial.Serial(ardunioLocation[0], 115200)
 while True:
 	print ser.readline(),
+
+## Function that writes coordinates to TABLE ttl in DATABASE data.db
+## Must Create DATABASE AND TABLE prior to this code running
+## Table creation script can be found under SilentCircuit/createTable.py
+def wt2Sqlite3(coord):
+	import sqlite3
+	conn = sqlite3.connect('./data.db')
+	curs = conn.cursor()
+	ins = 'INSERT INTO ttl (lat, long) VALUES (?,?)'
+	curs.execute(ins, coord)
+	conn.commit()
+	print('record successfully imported')
+
+##simulates coordinate input and calls the above function
+coord1 = [10.0000, -20.0000]
+wt2Sqlite3(coord1)
+coord2 = [30.0000, -40.0000]
+wt2Sqlite3(coord2)
+coord3 = [50.0000, -60.0000]
+wt2Sqlite3(coord3)
+coord4 = [70.0000, -80.0000]
+wt2Sqlite3(coord4)
+coord5 = [90.0000, -10.0000]
+wt2Sqlite3(coord5)
