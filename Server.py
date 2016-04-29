@@ -21,7 +21,7 @@ print "I hope you are using a", computerSystem
 if computerSystem == 'Mac':
     typeFile = "/dev/cu.usbmodem*"
 elif computerSystem == 'Raspi':
-    typeFile = "/dev/ttyAMC*"
+    typeFile = "/dev/ttyACM*"
 
 ardunioLocation = glob.glob(typeFile)
 if not ardunioLocation:
