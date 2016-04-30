@@ -64,21 +64,25 @@ def wt2Sqlite3(coord):
 	print('record successfully imported')
 
 ##simulates coordinate input and calls the above function
-coord1 = [10.0000, -20.0000]
-wt2Sqlite3(coord1)
-coord2 = [30.0000, -40.0000]
-wt2Sqlite3(coord2)
-coord3 = [50.0000, -60.0000]
-wt2Sqlite3(coord3)
-coord4 = [70.0000, -80.0000]
-wt2Sqlite3(coord4)
-coord5 = [90.0000, -10.0000]
-wt2Sqlite3(coord5)
+#coord1 = [10.0000, -20.0000]
+#wt2Sqlite3(coord1)
+#coord2 = [30.0000, -40.0000]
+#wt2Sqlite3(coord2)
+#coord3 = [50.0000, -60.0000]
+#wt2Sqlite3(coord3)
+#coord4 = [70.0000, -80.0000]
+#wt2Sqlite3(coord4)
+#coord5 = [90.0000, -10.0000]
+#wt2Sqlite3(coord5)
 try:
     thread.start_new_thread( receiveFromArduino, ("Thread-1", 2, ) )
     thread.start_new_thread( sendToArduino, ("Thread-2", 4, ) )
 except:
     print "Error: unable to start thread"
+
+
+time.sleep(10)
+wt2Sqlite3([100,100])
 
 while 1:
     pass
