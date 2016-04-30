@@ -54,14 +54,14 @@ def wt2Sqlite3(IMEIdata, coordinates):
 	print('record successfully longitude')
 
 def wt2Sqlite3(IMEIdata, latitude , longitude):
-	import sqlite3
-	conn = sqlite3.connect('./data.db')
-	curs = conn.cursor()
-	insertStatement = 'INSERT INTO ttl (imei, latitude, longitude) VALUES (?,?)'
+    import sqlite3
+    conn = sqlite3.connect('./data.db')
+    curs = conn.cursor()
+    insertStatement = 'INSERT INTO ttl (imei, latitude, longitude) VALUES (?,?)'
     insertData = [IMEIdata,latitude,longitude]
-	curs.execute(insertStatement, insertData)
-	conn.commit()
-	print('record successfully imported')
+    curs.execute(insertStatement, insertData)
+    conn.commit()
+    print('record successfully imported')
 
 
 ser = serial.Serial(ardunioLocation[0], 115200)
