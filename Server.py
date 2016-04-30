@@ -74,6 +74,7 @@ def wt2Sqlite3(coord):
 #wt2Sqlite3(coord4)
 #coord5 = [90.0000, -10.0000]
 #wt2Sqlite3(coord5)
+print "Before starting threads"
 try:
     thread.start_new_thread( receiveFromArduino, ("Thread-1", 2, ) )
     thread.start_new_thread( sendToArduino, ("Thread-2", 4, ) )
