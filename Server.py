@@ -47,9 +47,7 @@ def sendToArduino (threadName, delay):
 
 
 ser = serial.Serial(ardunioLocation[0], 115200)
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
+
 while True:
 	print ser.readline(),
 
