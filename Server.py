@@ -88,10 +88,11 @@ try:
 except:
     print "Error: unable to start thread"
 
-print "Before sleep and write to DB"
-time.sleep(10)
-wt2Sqlite3(123456789012345,100,100)
-print "After sleep and write to DB"
+# testing the database
+# print "Before sleep and write to DB"
+# time.sleep(6)
+# wt2Sqlite3(123456789012345,100,100)
+# print "After sleep and write to DB"
 
 while 1:
     pass
