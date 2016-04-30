@@ -76,8 +76,6 @@ coord4 = [70.0000, -80.0000]
 wt2Sqlite3(coord4)
 coord5 = [90.0000, -10.0000]
 wt2Sqlite3(coord5)
-=======
->>>>>>> write2sql-branch
 try:
     thread.start_new_thread( receiveFromArduino, ("Thread-1", 2, ) )
     thread.start_new_thread( sendToArduino, ("Thread-2", 4, ) )
@@ -86,7 +84,3 @@ except:
 
 while 1:
     pass
-<<<<<<< HEAD
-=======
->>>>>>> master
->>>>>>> write2sql-branch
