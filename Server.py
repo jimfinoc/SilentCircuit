@@ -80,9 +80,10 @@ try:
 except:
     print "Error: unable to start thread"
 
-
+print "Before sleep and write to DB"
 time.sleep(10)
 wt2Sqlite3([100,100])
+print "After sleep and write to DB"
 
 while 1:
     pass
