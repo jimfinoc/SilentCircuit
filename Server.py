@@ -58,7 +58,8 @@ def wt2Sqlite3(IMEIdata, latitude , longitude):
 	conn = sqlite3.connect('./data.db')
 	curs = conn.cursor()
 	insertStatement = 'INSERT INTO ttl (imei, latitude, longitude) VALUES (?,?)'
-	curs.execute(insertStatement, IMEIdata, latitude, longitude,)
+    insertData = [IMEIdata,latitude,longitude]
+	curs.execute(insertStatement, insertData)
 	conn.commit()
 	print('record successfully imported')
 
