@@ -44,16 +44,6 @@ def sendToArduino (threadName, delay):
         inputData = raw_input('Enter command: ')
         ser.write(inputData.encode('utf-8'))
 
-
-
-ser = serial.Serial(ardunioLocation[0], 115200)
-
-while True:
-	print ser.readline(),
-
-## Function that writes coordinates to TABLE ttl in DATABASE data.db
-## Must Create DATABASE AND TABLE prior to this code running
-## Table creation script can be found under SilentCircuit/createTable.py
 def wt2Sqlite3(coord):
 	import sqlite3
 	conn = sqlite3.connect('./data.db')
@@ -62,6 +52,13 @@ def wt2Sqlite3(coord):
 	curs.execute(ins, coord)
 	conn.commit()
 	print('record successfully imported')
+
+
+ser = serial.Serial(ardunioLocation[0], 115200)
+
+## Function that writes coordinates to TABLE ttl in DATABASE data.db
+## Must Create DATABASE AND TABLE prior to this code running
+## Table creation script can be found under SilentCircuit/createTable.py
 
 ##simulates coordinate input and calls the above function
 #coord1 = [10.0000, -20.0000]
