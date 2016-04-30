@@ -44,12 +44,21 @@ def sendToArduino (threadName, delay):
         inputData = raw_input('Enter command: ')
         ser.write(inputData.encode('utf-8'))
 
-def wt2Sqlite3(coord):
+def wt2Sqlite3(IMEIdata, coordinates):
 	import sqlite3
 	conn = sqlite3.connect('./data.db')
 	curs = conn.cursor()
-	ins = 'INSERT INTO ttl (lat, long) VALUES (?,?)'
-	curs.execute(ins, coord)
+	insertStatement = 'INSERT INTO ttl (imei, latitude, longitude) VALUES (?,?)'
+	curs.execute(insertStatement, IMEIdata, coordinates)
+	conn.commit()
+	print('record successfully longitude')
+
+def wt2Sqlite3(IMEIdata, latitude , longitude):
+	import sqlite3
+	conn = sqlite3.connect('./data.db')
+	curs = conn.cursor()
+	insertStatement = 'INSERT INTO ttl (imei, latitude, longitude) VALUES (?,?)'
+	curs.execute(insertStatement, IMEIdata, latitude, longitude,)
 	conn.commit()
 	print('record successfully imported')
 
