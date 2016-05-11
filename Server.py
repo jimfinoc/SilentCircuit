@@ -45,26 +45,42 @@ def sendToArduino (threadName, delay):
         inputData = raw_input('>')
         ser.write(inputData.encode('ascii'))
         ser.write(b"\n")
+        inputData = raw_input('Enter command: ')
+        ser.write(inputData.encode('utf-8'))
 
+# def wt2Sqlite3(IMEIdata, coordinates):
+# 	import sqlite3
+# 	conn = sqlite3.connect('./data.db')
+# 	curs = conn.cursor()
+# 	insertStatement = 'INSERT INTO ttl (imei, latitude, longitude) VALUES (?,?)'
+# 	curs.execute(insertStatement, IMEIdata, coordinates)
+# 	conn.commit()
+# 	print('record successfully longitude')
+>>>>>>> origin/master
 
-ser = serial.Serial(ardunioLocation[0], 115200)
+def wt2Sqlite3(IMEIdata, latitude , longitude):
+    import sqlite3
+    conn = sqlite3.connect('./data.db')
+    curs = conn.cursor()
+    insertStatement = 'INSERT INTO ttl (imei, latitude, longitude) VALUES (?,?,?)'
+    insertData = [IMEIdata,latitude,longitude]
+    curs.execute(insertStatement, insertData)
+    conn.commit()
+    print('record successfully imported')
+
 
 # while True:
 	# print ser.readline(),
 
+ser = serial.Serial(ardunioLocation[0], 115200)
+
+
 ## Function that writes coordinates to TABLE ttl in DATABASE data.db
 ## Must Create DATABASE AND TABLE prior to this code running
 ## Table creation script can be found under SilentCircuit/createTable.py
-def wt2Sqlite3(coord):
-	import sqlite3
-	conn = sqlite3.connect('./data.db')
-	curs = conn.cursor()
-	ins = 'INSERT INTO ttl (lat, long) VALUES (?,?)'
-	curs.execute(ins, coord)
-	conn.commit()
-	print('record successfully imported')
 
 ##simulates coordinate input and calls the above function
+
 # coord1 = [10.0000, -20.0000]
 # wt2Sqlite3(coord1)
 # coord2 = [30.0000, -40.0000]
@@ -75,11 +91,19 @@ def wt2Sqlite3(coord):
 # wt2Sqlite3(coord4)
 # coord5 = [90.0000, -10.0000]
 # wt2Sqlite3(coord5)
+print "Before starting threads"
+>>>>>>> origin/master
 try:
     thread.start_new_thread( receiveFromArduino, ("Thread-1", 1, ) )
     thread.start_new_thread( sendToArduino, ("Thread-2", 2, ) )
 except:
     print "Error: unable to start thread"
+
+# testing the database
+# print "Before sleep and write to DB"
+# time.sleep(6)
+# wt2Sqlite3(123456789012345,100,100)
+# print "After sleep and write to DB"
 
 while 1:
     pass
