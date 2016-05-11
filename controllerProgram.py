@@ -59,7 +59,7 @@ def testSend(phoneNumber = None, message = None):
         time.sleep(0.5)
         ser.write(message.encode() + b"\r")
         time.sleep(0.5)
-        ser.write(b"\r")
+        ser.write(b"\x1A\r\n")
         time.sleep(0.5)
     except :
         exit()
