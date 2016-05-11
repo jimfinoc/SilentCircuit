@@ -22,6 +22,8 @@ def receiveFromSerial (processName, delay):
 def sendToSerial (processName, delay):
     time.sleep(delay)
     print "%s: %s" % ( processName, time.ctime(time.time()) )
+    time.sleep(0.5)
+    ser.write(b'ATZ\r')
     while True:
         inputData = raw_input('Enter command: ')
         ser.write(inputData.encode('utf-8'))
@@ -36,20 +38,17 @@ def wt2Sqlite3(phoneNumber, latitudeDegrees , longitudeDegrees):
     conn.commit()
     print('record successfully imported')
 
-print "Before starting processs"
+print "Before starting processes"
 try:
     pR = Process(target=receiveFromSerial, args=("Receive", 1))
     pR.start()
     pR.join()
-    # process.start_new_process( receiveFromArduino, ("process-1", 3))
 except:
     print "Error: Cannot execute Receive"
 try:
     pS = Process(target=sendToSerial, args=("Send", 1))
     pS.start()
     pS.join()
-
-    # process.start_new_process( testSend, ("process-3",5))
 except:
     print "Error: Cannot execute Send"
 
