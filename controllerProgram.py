@@ -23,6 +23,7 @@ def sendToSerial (processName, delay):
     time.sleep(delay)
     print "%s: %s" % ( processName, time.ctime(time.time()) )
     time.sleep(0.5)
+    print (b'ATZ\r')
     ser.write(b'ATZ\r')
     while True:
         inputData = raw_input('Enter command: ')
