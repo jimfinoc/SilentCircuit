@@ -38,14 +38,14 @@ def wt2Sqlite3(phoneNumber, latitudeDegrees , longitudeDegrees):
 
 print "Before starting processs"
 try:
-    pR = Process(target=receiveFromArduino, args=("Receive", 1))
+    pR = Process(target=receiveFromSerial, args=("Receive", 1))
     pR.start()
     pR.join()
     # process.start_new_process( receiveFromArduino, ("process-1", 3))
 except:
     print "Error: Cannot execute Receive"
 try:
-    pS = Process(target=sendToArduino, args=("Send", 1))
+    pS = Process(target=sendToSerial, args=("Send", 1))
     pS.start()
     pS.join()
 
