@@ -17,7 +17,8 @@ def receiveFromSerial (processName, delay):
     time.sleep(delay)
     print "%s: %s" % ( processName, time.ctime(time.time()) )
     while True:
-        print ser.readline(),
+        command = ser.read()
+        print command,
 
 def sendToSerial (processName, delay):
     time.sleep(delay)
@@ -41,7 +42,7 @@ def wt2Sqlite3(phoneNumber, latitudeDegrees , longitudeDegrees):
 
 print "Before starting processes"
 try:
-    pR = Process(target=receiveFromSerial, args=("Receive", 1))
+    pR = Process(target=receiveFromSerial, args=("Receive", 0))
     pR.start()
     pR.join()
 except:
