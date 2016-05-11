@@ -89,5 +89,3 @@ def testSend(phoneNumber = None, message = None):
         time.sleep(0.5)
         ser.write(bytes([26]))
         time.sleep(0.5)
-    # finally:
-    #     phone.close()
