@@ -55,7 +55,7 @@ def testSend(phoneNumber = None, message = None):
         time.sleep(0.5)
         ser.write(b'AT+CMGF=1\r')
         time.sleep(0.5)
-        ser.write(b'AT+CMGS="' + recipient.encode() + b'"\r')
+        ser.write(b'AT+CMGS="' + phoneNumber.encode() + b'"\r')
         time.sleep(0.5)
         ser.write(message.encode() + b"\r")
         time.sleep(0.5)
