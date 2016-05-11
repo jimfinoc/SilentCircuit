@@ -35,21 +35,22 @@ def receiveFromArduino (threadName, delay):
     time.sleep(delay)
     print "%s: %s" % ( threadName, time.ctime(time.time()) )
     while True:
-        print ser.readline(),
+        line = ser.readline()
+        print line,
 
 def sendToArduino (threadName, delay):
     time.sleep(delay)
     print "%s: %s" % ( threadName, time.ctime(time.time()) )
     while True:
-        inputData = raw_input('Enter command: ')
-        ser.write(inputData.encode('utf-8'))
-
+        inputData = raw_input('>')
+        ser.write(inputData.encode('ascii'))
+        ser.write(b"\n")
 
 
 ser = serial.Serial(ardunioLocation[0], 115200)
 
-while True:
-	print ser.readline(),
+# while True:
+	# print ser.readline(),
 
 ## Function that writes coordinates to TABLE ttl in DATABASE data.db
 ## Must Create DATABASE AND TABLE prior to this code running
@@ -64,19 +65,19 @@ def wt2Sqlite3(coord):
 	print('record successfully imported')
 
 ##simulates coordinate input and calls the above function
-coord1 = [10.0000, -20.0000]
-wt2Sqlite3(coord1)
-coord2 = [30.0000, -40.0000]
-wt2Sqlite3(coord2)
-coord3 = [50.0000, -60.0000]
-wt2Sqlite3(coord3)
-coord4 = [70.0000, -80.0000]
-wt2Sqlite3(coord4)
-coord5 = [90.0000, -10.0000]
-wt2Sqlite3(coord5)
+# coord1 = [10.0000, -20.0000]
+# wt2Sqlite3(coord1)
+# coord2 = [30.0000, -40.0000]
+# wt2Sqlite3(coord2)
+# coord3 = [50.0000, -60.0000]
+# wt2Sqlite3(coord3)
+# coord4 = [70.0000, -80.0000]
+# wt2Sqlite3(coord4)
+# coord5 = [90.0000, -10.0000]
+# wt2Sqlite3(coord5)
 try:
-    thread.start_new_thread( receiveFromArduino, ("Thread-1", 2, ) )
-    thread.start_new_thread( sendToArduino, ("Thread-2", 4, ) )
+    thread.start_new_thread( receiveFromArduino, ("Thread-1", 1, ) )
+    thread.start_new_thread( sendToArduino, ("Thread-2", 2, ) )
 except:
     print "Error: unable to start thread"
 
