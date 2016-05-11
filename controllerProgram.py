@@ -64,5 +64,6 @@ def testSend(phoneNumber = None, message = None):
     except :
         exit()
 
+testSend()
 while 1:
     pass
