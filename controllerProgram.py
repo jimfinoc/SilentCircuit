@@ -3,7 +3,7 @@ import os
 import platform
 import glob
 import sys
-import thread
+from multiprocessing import Process
 import time
 
 
@@ -13,15 +13,15 @@ ttyLocation = glob.glob(typeFile)
 ser = serial.Serial(ttyLocation[0], 115200)
 
 
-def receiveFromSerial (threadName, delay):
+def receiveFromSerial (processName, delay):
     time.sleep(delay)
-    print "%s: %s" % ( threadName, time.ctime(time.time()) )
+    print "%s: %s" % ( processName, time.ctime(time.time()) )
     while True:
         print ser.readline(),
 
-def sendToSerial (threadName, delay):
+def sendToSerial (processName, delay):
     time.sleep(delay)
-    print "%s: %s" % ( threadName, time.ctime(time.time()) )
+    print "%s: %s" % ( processName, time.ctime(time.time()) )
     while True:
         inputData = raw_input('Enter command: ')
         ser.write(inputData.encode('utf-8'))
@@ -36,15 +36,22 @@ def wt2Sqlite3(phoneNumber, latitudeDegrees , longitudeDegrees):
     conn.commit()
     print('record successfully imported')
 
-print "Before starting threads"
+print "Before starting processs"
 try:
-    thread.start_new_thread( receiveFromArduino, ("Thread-1", 2))
+    pR = Process(target=receiveFromArduino, args=("Receive", 1))
+    pR.start()
+    pR.join()
+    # process.start_new_process( receiveFromArduino, ("process-1", 3))
 except:
-    print "Error: Cannot execute Thread-1"
+    print "Error: Cannot execute Receive"
 try:
-    thread.start_new_thread( testSend, ("Thread-3",5))
+    pS = Process(target=sendToArduino, args=("Send", 1))
+    pS.start()
+    pS.join()
+
+    # process.start_new_process( testSend, ("process-3",5))
 except:
-    print "Error: Cannot execute Thread-3"
+    print "Error: Cannot execute Send"
 
 def testSend(phoneNumber = None, message = None):
     if phoneNumber is None:
