@@ -6,32 +6,9 @@ import sys
 import thread
 import time
 
-## Recognize Machine
-computerSystem = ""
-typeFile = ""
-if platform.system() == 'Darwin':
-    computerSystem = 'Mac'
-elif platform.system() == 'Linux':
-    computerSystem = 'Raspi'
-else:
-    computerSystem = 'Unknown'
-print "I hope you are using a", computerSystem
 
-## Predict location of terminal
-if computerSystem == 'Mac':
-    typeFile = "unusable"
-    print "Sorry, you need to use a Raspi."
-    sys.exit()
-elif computerSystem == 'Raspi':
-    typeFile = "/dev/ttyAMA0"
-
+typeFile = "/dev/ttyAMA0"
 ttyLocation = glob.glob(typeFile)
-if not ttyLocation:
-    print "I do not see the serial connection"
-    sys.exit()
-else:
-    print "Your serial connection is at",
-    print ttyLocation[0]
 
 ser = serial.Serial(ttyLocation[0], 115200)
 
@@ -64,13 +41,8 @@ try:
     thread.start_new_thread( receiveFromArduino, ("Thread-1", 2, ) )
     # thread.start_new_thread( sendToArduino, ("Thread-2", 4, ) )
     thread.start_new_thread( testSend, ("Thread-3",5 ))
-
 except:
     print "Error: unable to start threads or something broke!"
-
-while 1:
-    pass
-
 
 def testSend(phoneNumber = None, message = None):
     if phoneNumber is None:
@@ -89,3 +61,8 @@ def testSend(phoneNumber = None, message = None):
         time.sleep(0.5)
         ser.write(bytes([26]))
         time.sleep(0.5)
+    except :
+        exit()
+
+while 1:
+    pass
