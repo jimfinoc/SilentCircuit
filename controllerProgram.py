@@ -39,10 +39,13 @@ def wt2Sqlite3(phoneNumber, latitudeDegrees , longitudeDegrees):
 print "Before starting threads"
 try:
     thread.start_new_thread( receiveFromArduino, ("Thread-1", 2, ) )
+except:
+    print "Error: Cannot execute Thread-1"
     # thread.start_new_thread( sendToArduino, ("Thread-2", 4, ) )
+try:
     thread.start_new_thread( testSend, ("Thread-3",5 ))
 except:
-    print "Error: unable to start threads or something broke!"
+    print "Error: Cannot execute Thread-3"
 
 def testSend(phoneNumber = None, message = None):
     if phoneNumber is None:
